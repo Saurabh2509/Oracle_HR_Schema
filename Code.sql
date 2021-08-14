@@ -275,16 +275,33 @@ PROBLEM_STATEMENT :
 
         Select * From Hr.Departments dept 
         Natural join (Select emp.Department_id ,max(emp.Salary) from Hr.employees emp 
-        Group by Department_id) t  
-        Natural Join Hr.job_History jbh 
+        Group by Department_id having max(emp.salary)>10000) 
+        Natural Join Hr.job_History jbh
         
 53.	Display the departments into which no employee joined in last two years.
 54.	Display employee name, job title, start date, and end date of past jobs of all employees with commission percentage null.
+
+        Select emp.EMPLOYEE_ID,emp.FIRST_NAME,emp.LAST_NAME,jbh.START_DATE,jbh.END_DATE From Hr.Employees emp
+        join Hr.Job_History jbh
+        on(emp.job_id = jbh.job_id)
+        where COMMISSION_PCT is NULL
+        
 55.	Display details of manager who manages more than 5 employees.
+
+        Select emp.* From Hr.Employees emp left join (Select count(EMPLOYEE_ID),MANAGER_ID From Hr.Employees
+        Group by Manager_Id having count(Employee_id)>5) t 
+        on(emp.MANAGER_ID= t.MANAGER_ID)
+        
 56.	Display country name, city, and number of departments where department has more than 5 employees.
+
 57.	Display job title and average salary for employees who did a job in the past.
+
 58.	Display employees who did not do any job in the past.
+
 59.	Display the month in which more than 5 employees joined in any department located in Sydney.
+
 60.	Display details of departments in which the maximum salary is more than 10000.
+
 61.	Display details of departments managed by ‘Smith’.
+
 62.	Display jobs into which employees joined in the current year.
