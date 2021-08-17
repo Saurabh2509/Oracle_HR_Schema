@@ -298,6 +298,11 @@ PROBLEM_STATEMENT :
 
 58.	Display employees who did not do any job in the past.
 
+        Select emp.* From Hr.Employees emp
+        Full outer Join Hr.job_History jbh
+        on(emp.EMPLOYEE_ID =jbh.EMPLOYEE_ID)
+        where emp.EMPLOYEE_ID NOt in (Select EMPLOYEE_ID From Hr.Job_History)
+
 59.	Display the month in which more than 5 employees joined in any department located in Sydney.
 
 60.	Display details of departments in which the maximum salary is more than 10000.
